@@ -1,0 +1,11 @@
+tqdm
+numpy
+soundfile
+librosa
+python_speech_features
+torch>=1.5.0
+scipy
+scikit-learn
+webrtcvad
+matplotlib
+torchaudio>=0.5.0

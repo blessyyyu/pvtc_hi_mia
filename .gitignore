@@ -1,0 +1,13 @@
+src/data
+data
+src/exp
+
+__pycache__
+src/mfcc
+src/mfcc_hires
+
+index_words
+
+outputs
+
+outputs_pkls
