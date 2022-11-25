@@ -35,7 +35,7 @@ args = parser.parse_args();
 
 
 
-
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 seed = args.seed
 torch.manual_seed(seed)
 torch.cuda.manual_seed_all(seed)
@@ -133,7 +133,6 @@ def train(epc = 1):
     global criterion
 
     # data loader preparation
-
     train_dataset = NpyDataset(train_utt2data, utt2label, label2int, need_aug=True, with_label=True, shuffle=True, win_size=WIN_SIZE)
     dear_train_dataloader = MyDataLoader(train_dataset, batch_size=BATCH_SIZE, num_workers=20)
 

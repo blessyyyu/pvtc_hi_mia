@@ -1,6 +1,6 @@
 #!/bin/bash
 
-stage=7
+stage=1
 
 echo "local/run_kws.sh"
 
@@ -51,13 +51,9 @@ else
 output_model=src/trained_kws_model
 
 fi
-# <<COMMENT
-if [ $stage -le 6 ];then
-	# python src/vad_evalu_task.py --test_model $output_model  --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --mode task/task1 --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 || exit 1
-	# python src/vad_evalu_task.py  --test_model $output_model --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --mode task/task2 --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 200 --vad_max_activate 0.8 || exit 1
-	# python src/vad_evalu_task_gpu.py --test_model $output_model  --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --mode src/data/merge/dev --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 200 --vad_max_activate 0.8 || exit 1
-	# python src/vad_evalu_task_gpu.py  --test_model $output_model --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --mode src/data/merge/test --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 130 --vad_max_activate 0.9 || exit 1
 
+
+if [ $stage -le 6 ];then
 	python src/vad_evalu_task_gpu_n.py --test_model $output_model  --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --mode src/data/merge/dev --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 || exit 1
 	python src/vad_evalu_task_gpu_n.py  --test_model $output_model --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --mode src/data/merge/test --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 || exit 1
 
@@ -97,6 +93,4 @@ fi
 
 # fi
 
-
-echo "local/run_kws.sh succeeded"
-
+echo "local/run_kws.sh succeeded";

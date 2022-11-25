@@ -161,7 +161,7 @@ print("Predict done.")
 fpr, tpr, thresholds = roc_curve(y, scores, pos_label=1)
 auc_score = auc(fpr, tpr)
 print("auc_score: ", auc_score)
-
+# y: label, keys: 音频id
 save_pickle(pkl_name, {"y": y, "scores": scores, "keys": keys ,"time":times})
 print("Finished.")
 

@@ -8,7 +8,7 @@
 nj=40
 stage=0
 x=PVTC
-
+# stage0 主要是在提取特征
 if [ $stage -le 0 ]; then
 
 utils/fix_data_dir.sh data/$x || exit 1;
@@ -28,7 +28,9 @@ utils/fix_data_dir.sh data/$x || exit 1;
 
 
 fi
-
+# exp/nnet3/tdnn_sp里是kaldi已经训练好的模型
+# data/lang_aishell是词典模型
+# 两个模型共同来对音频特征进行force alignment
 if [ $stage -le 1 ]; then
 
 steps/nnet3/align.sh --nj $nj --cmd "$train_cmd" --use-gpu false --scale_opts "--transition-scale=1.0 --acoustic-scale=10.0 --self-loop-scale=0.1" \
@@ -36,7 +38,7 @@ steps/nnet3/align.sh --nj $nj --cmd "$train_cmd" --use-gpu false --scale_opts "-
 
 fi
 
-
+# 整理出来标注好时间的ctm文件.
 if [ $stage -le 2 ]; then
 
 steps/get_train_ctm.sh data/$x data/lang_aishell exp/nnet3_$x || exit 1

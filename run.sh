@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-stage=2
+stage=-2
 
 # important !!! should change to your own path
-src_aishell=
-src_kws=
+src_aishell=/sda/yushaoqing/aishell
+src_kws=/sda/yushaoqing/hi_mia
 
 data_aishell=data
 data_kws=data/kws
@@ -27,14 +27,16 @@ if [ $stage -le -2 ]; then
 		local/download_and_untar.sh $src_aishell $data_url data_aishell || exit 1;
 		local/download_and_untar.sh $src_aishell $data_url resource_aishell || exit 1;
 	fi
-	# local/kws_download_and_untar.sh $src_kws $kws_url dev.tar.gz || exit 1;
+	local/kws_download_and_untar.sh $src_kws $kws_url dev.tar.gz || exit 1;
 	local/kws_download_and_untar.sh $src_kws $kws_url test.tar.gz || exit 1;
 	local/kws_download_and_untar.sh $src_kws $kws_url train.tar.gz || exit 1;
+	
 	# You should write your own path to this script
 	local/prepare_kws.sh ${src_kws} || exit 1;
 	local/aishell_data_prep.sh $src_aishell/data_aishell/wav $src_aishell/data_aishell/transcript
 	cd ..
 fi
+
 
 if [ $stage -le -1 ];then
 	cd src
@@ -72,6 +74,8 @@ if [ $stage -le -1 ];then
 	cd ..
 fi
 
+
+
 if [ $stage -le 0 ];then
 	echo "stage 0 copy kws data to PVTC for nnet3 to align"
 	cd src
@@ -80,6 +84,7 @@ if [ $stage -le 0 ];then
 	cp data/train/wav.scp data/PVTC/neg_wav.scp
 	cd ..
 fi
+
 
 if [ $stage -le 1 ];then
 	cd src
@@ -130,7 +135,6 @@ if [ $stage -le 4 ];then
 	utils/data/get_utt2dur.sh --nj 10 data/merge/test
 	cd ..
 fi
-
 
 ## 后面的内容与Himia项目无关
 
