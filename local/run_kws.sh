@@ -65,32 +65,4 @@ if [ $stage -le 7 ];then
 	python src/get_th.py --total_hours 65.3483 --plt_name wake_test.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --threshold_for_num_false_alarm_per_hour 1.0
 fi
 
-# if [ $stage -le 8 ];then	
-# 	mkdir -p outputs_txts
-# 	# python src/process_pkl_th.py --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_task1.txt --threshold `python src/get_th.py --total_hours 20.1309 --plt_name wake_task1.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --threshold_for_num_false_alarm_per_hour 1.0` || exit 1
-# 	# python src/process_pkl_th.py --pickle_name outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_task2.txt --threshold `python src/get_th.py --total_hours 36.0836 --plt_name  wake_task2.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --threshold_for_num_false_alarm_per_hour 1.0` || exit 1
-# fi
-# COMMENT
-
-# if [ $stage -le 8 ];then
-# 	python src/get_trigger_wav_task.py --test_model $output_model --mode task1 --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_task1.txt --save_path data/trigger_wav/task1/ --threshold `python src/get_th.py --total_hours 20.1309 --plt_name wake_task1.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --threshold_for_num_false_alarm_per_hour 1.0` --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 || exit 1
-# 	python src/get_trigger_wav_task.py  --test_model $output_model --mode task2 --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_task2.txt --save_path data/trigger_wav/task2/ --threshold `python src/get_th.py --total_hours 36.0836 --plt_name  wake_task2.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --threshold_for_num_false_alarm_per_hour 1.0` --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 200 --vad_max_activate 0.8 || exit 1
-
-# fi
-
-# if [ $stage -le 9 ];then
-# 	python src/get_pos_wav_task.py --test_model  $output_model  --mode task/task1 --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 --save_path data/trigger_wav/task1/
-# 	python src/get_pos_wav_task.py --test_model  $output_model  --mode task/task2 --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 200 --vad_max_activate 0.8 --save_path data/trigger_wav/task2/
-
-# fi
-
-# if [ $stage -le 10 ];then
-	
-# 	python src/get_testset_trigger_wav_task.py --test_model outputs/train_Baseline-words_fbank8040_LSTMAvg/models/model_100 --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_test_task1.txt --save_path data/trigger_wav/test/task1/ --wav_scp_file testset_task1/wav_for_wake.scp  --threshold `python src/get_th.py --total_hours 20.1309 --plt_name wake_task1.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task1.pkl --threshold_for_num_false_alarm_per_hour 1.0` --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 3 --vad_max_length 130 --vad_max_activate 0.9 --predict_length 80 --segment_step 10
-
-# 	python src/get_testset_trigger_wav_task.py --test_model outputs/train_Baseline-words_fbank8040_LSTMAvg/models/model_100 --txt_name outputs_txts/Baseline-words_fbank8040_LSTMAvg_test_task2.txt --save_path data/trigger_wav/test/task2/ --threshold `python src/get_th.py --total_hours 36.0836 --plt_name  wake_task2.jpg --pkl_names outputs_pkls/Baseline-words_fbank8040_LSTMAvg_task2.pkl --threshold_for_num_false_alarm_per_hour 1.0` --model_class lstm_models --model_name LSTMAvg --word_num 3 --step_size 3 --conf_size 150 --vad_mode 0 --vad_max_length 200 --vad_max_activate 0.8 --predict_length 80 --segment_step 10 --wav_scp_file testset_task2/wav_for_wake.scp
-
-
-# fi
-
 echo "local/run_kws.sh succeeded";
